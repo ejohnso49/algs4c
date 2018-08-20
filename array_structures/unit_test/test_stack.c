@@ -5,18 +5,22 @@
 #include "../stack.h"
 #include "../../unity/src/unity.h"
 
-void test_stack(void) {
-    TEST_ASSERT_EQUAL_INT32(0, 1);
+void test_stack_init(void) {
+    stack_t *stack;
+    unsigned int test_N = 50;
+    unsigned int test_init_val = 0;
+    stack_init(&stack, test_N, sizeof(unsigned int));
+
+    TEST_ASSERT_EQUAL_UINT(test_N, stack->N);
+    TEST_ASSERT_EACH_EQUAL_MEMORY(&test_init_val, stack->data, sizeof(unsigned int), test_N);
+    TEST_ASSERT_EQUAL_UINT(0, stack->size);
+    TEST_ASSERT_EQUAL_UINT(sizeof(unsigned int), stack->elem_size);
 }
 
 int main(void) {
-    printf("We're running a test!\n");
     UNITY_BEGIN();
 
-    printf("We're in Unity mode\n");
-    RUN_TEST(test_stack);
-
-    printf("Ending Unity mode!\n");
+    RUN_TEST(test_stack_init);
 
     return UNITY_END();
 }
