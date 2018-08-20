@@ -76,3 +76,6 @@ void stack_free(stack_t **stack) {
     }
 }
 
+bool is_empty(stack_t *stack) {
+    return stack->size != 0;
+}
