@@ -45,7 +45,6 @@ int stack_push(stack_t *stack, void *data) {
         stack_resize(stack, stack->N << 0x1);
     }
 
-    printf("offset = %lu\n", stack->size * stack->elem_size);
     dest = (unsigned char *) stack->data + (stack->size * stack->elem_size);
     memcpy(dest, data, stack->elem_size);
     stack->size++;
