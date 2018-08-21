@@ -35,15 +35,15 @@ void test_stack_push_pop(void) {
     }
 
     TEST_ASSERT_EQUAL_UINT(test_N, stack->N);
-    TEST_ASSERT_EQUAL_UINT(test_N, stack->size);
+    TEST_ASSERT_EQUAL_UINT(test_N, stack_get_size(stack));
 
 
     for (int i = test_N - 1; i >= 0; i--) {
         stack_pop(stack, &result);
         TEST_ASSERT_EQUAL_UINT(i, result);
-        TEST_ASSERT_EQUAL_UINT(i, stack->size);
+        TEST_ASSERT_EQUAL_UINT(i, stack_get_size(stack));
     }
-    TEST_ASSERT_EQUAL_UINT(0, stack->size);
+    TEST_ASSERT_EQUAL_UINT(0, stack_get_size(stack));
 
     empty_pop = result;
     stack_pop(stack, &empty_pop);
@@ -62,7 +62,7 @@ void test_stack_growth_resize(void) {
     for (unsigned int i = 0; i < 100; i++) {
         size_t prev_N = stack->N;
         stack_push(stack, &i);
-        TEST_ASSERT_EQUAL_UINT(i + 1, stack->size);
+        TEST_ASSERT_EQUAL_UINT(i + 1, stack_get_size(stack));
         if (i == prev_N && i > 0) {   // Check to see if stack doubling when expected
             TEST_ASSERT_EQUAL_UINT(prev_N << 1, stack->N);
         }

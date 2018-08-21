@@ -22,5 +22,6 @@ extern int stack_push(stack_t *stack, void *item);
 extern void stack_free(stack_t **stack);
 extern int stack_pop(stack_t *stack, void *data);
 extern bool stack_is_empty(stack_t *stack);
+extern unsigned int stack_get_size(stack_t *stack);
 
 #endif //C_INTERVIEWS_STACK_H

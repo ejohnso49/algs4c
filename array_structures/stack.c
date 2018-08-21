@@ -85,3 +85,7 @@ void stack_free(stack_t **stack) {
 bool stack_is_empty(stack_t *stack) {
     return stack->size == 0;
 }
+
+unsigned int stack_get_size(stack_t *stack) {
+    return stack->size;
+}
