@@ -73,12 +73,37 @@ void test_stack_growth_resize(void) {
     stack_free(&stack);
 }
 
+void test_stack_shrink_resize(void) {
+    stack_t *stack = NULL;
+    unsigned int test_N = 500;
+
+    stack_init(&stack, test_N, sizeof(int));
+    TEST_ASSERT_NOT_NULL(stack);
+    TEST_ASSERT_NOT_NULL(stack->data);
+    for (unsigned int i = 0; i < test_N; i++) {
+        stack_push(stack, &i);
+    }
+    TEST_ASSERT_EQUAL_UINT(test_N, stack_get_size(stack));
+    for (unsigned int i = test_N; i > 0; i--) {
+        size_t prev_N = stack->N;
+        int temp;
+        stack_pop(stack, &temp);
+        if (i <= (prev_N >> 1)) {
+            TEST_ASSERT_EQUAL_UINT(prev_N >> 1, stack->N);
+        }
+    }
+    TEST_ASSERT_TRUE(stack_is_empty(stack));
+    TEST_ASSERT_EQUAL_UINT(1, stack->N);
+    stack_free(&stack);
+}
+
 int main(void) {
     UNITY_BEGIN();
 
     RUN_TEST(test_stack_init_free);
     RUN_TEST(test_stack_push_pop);
     RUN_TEST(test_stack_growth_resize);
+    RUN_TEST(test_stack_shrink_resize);
 
     return UNITY_END();
 }
