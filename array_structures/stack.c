@@ -56,6 +56,10 @@ int stack_push(stack_t *stack, void *data) {
 
 int stack_pop(stack_t *stack, void *data) {
     void *src;
+    if (stack->size <= 0) {
+        return -1;
+    }
+
     if ((stack->N > 1) && (stack->size <= (stack->N >> 1))) {
         stack_resize(stack, stack->N >> 1);
     }
