@@ -56,7 +56,7 @@ int stack_push(stack_t *stack, void *data) {
 
 int stack_pop(stack_t *stack, void *data) {
     void *src;
-    if (is_empty(stack)) {
+    if (stack_is_empty(stack)) {
         return -1;
     }
 
@@ -82,6 +82,6 @@ void stack_free(stack_t **stack) {
     }
 }
 
-bool is_empty(stack_t *stack) {
+bool stack_is_empty(stack_t *stack) {
     return stack->size == 0;
 }

@@ -15,7 +15,7 @@ void test_stack_init_free(void) {
     TEST_ASSERT_NOT_NULL(stack->data);
     TEST_ASSERT_EQUAL_UINT(test_N, stack->N);
     TEST_ASSERT_EACH_EQUAL_MEMORY(&test_init_val, stack->data, sizeof(unsigned int), test_N);
-    TEST_ASSERT_TRUE(is_empty(stack));
+    TEST_ASSERT_TRUE(stack_is_empty(stack));
     TEST_ASSERT_EQUAL_UINT(sizeof(unsigned int), stack->elem_size);
 
     stack_free(&stack);
