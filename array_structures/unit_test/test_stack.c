@@ -6,7 +6,7 @@
 #include "../../unity/src/unity.h"
 
 void test_stack_init_free(void) {
-    stack_t *stack;
+    stack_t *stack = NULL;
     unsigned int test_N = 50;
     unsigned int test_init_val = 0;
     stack_init(&stack, test_N, sizeof(unsigned int));

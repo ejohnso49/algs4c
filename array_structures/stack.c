@@ -7,7 +7,6 @@
 #include <stdio.h>
 
 static int stack_resize(stack_t *stack, size_t N) {
-    printf("Resizing to %lu\n", N);
     void *temp;
 
     temp = calloc(stack->elem_size, N * stack->elem_size);
@@ -42,7 +41,7 @@ int stack_init(stack_t **stack, size_t N, size_t elem_size) {
 int stack_push(stack_t *stack, void *data) {
     void *dest;
     if (stack->size == stack->N) {
-        stack_resize(stack, stack->N << 0x1);
+        stack_resize(stack, stack->N << 1);
     }
 
     dest = (unsigned char *) stack->data + (stack->size * stack->elem_size);
@@ -53,8 +52,8 @@ int stack_push(stack_t *stack, void *data) {
 
 int stack_pop(stack_t *stack, void *data) {
     void *src;
-    if (stack->size < (stack->N >> 2)) {
-        stack_resize(stack, stack->N >> 0x2);
+    if ((stack->N > 1) && (stack->size <= (stack->N >> 1))) {
+        stack_resize(stack, stack->N >> 1);
     }
 
     stack->size--;
