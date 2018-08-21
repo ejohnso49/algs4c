@@ -40,6 +40,10 @@ int stack_init(stack_t **stack, size_t N, size_t elem_size) {
 
 int stack_push(stack_t *stack, void *data) {
     void *dest;
+    if (data == NULL) {
+        return -1;
+    }
+
     if (stack->size == stack->N) {
         stack_resize(stack, stack->N << 1);
     }
