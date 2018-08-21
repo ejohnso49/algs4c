@@ -53,11 +53,32 @@ void test_stack_push_pop(void) {
     TEST_ASSERT_NULL(stack);
 }
 
+void test_stack_growth_resize(void) {
+    stack_t *stack = NULL;
+
+    stack_init(&stack, 1, sizeof(int));
+    TEST_ASSERT_NOT_NULL(stack);
+    TEST_ASSERT_NOT_NULL(stack->data);
+    for (unsigned int i = 0; i < 100; i++) {
+        size_t prev_N = stack->N;
+        stack_push(stack, &i);
+        TEST_ASSERT_EQUAL_UINT(i + 1, stack->size);
+        if (i == prev_N && i > 0) {   // Check to see if stack doubling when expected
+            TEST_ASSERT_EQUAL_UINT(prev_N << 1, stack->N);
+        }
+    }
+
+    stack_free(&stack);
+    TEST_ASSERT_NULL(stack);
+    stack_free(&stack);
+}
+
 int main(void) {
     UNITY_BEGIN();
 
     RUN_TEST(test_stack_init_free);
     RUN_TEST(test_stack_push_pop);
+    RUN_TEST(test_stack_growth_resize);
 
     return UNITY_END();
 }
