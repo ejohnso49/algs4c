@@ -73,7 +73,11 @@ int stack_pop(stack_t *stack, void *data) {
 void stack_free(stack_t **stack) {
     if ((*stack) != NULL) {
         if ((*stack)->data != NULL) {
-            free((*stack)->data);
+            if ((*stack)->elem_free != NULL) {
+                (*stack)->elem_free((*stack)->data, (*stack)->N);
+            } else {
+                free((*stack)->data);
+            }
             (*stack)->data = NULL;
         }
 

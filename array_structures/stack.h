@@ -15,6 +15,7 @@ struct stack_s {
     unsigned int size;
     size_t elem_size;
     void *data;
+    void (*elem_free)(void *, size_t);
 };
 
 extern int stack_init(stack_t **stack, size_t N, size_t elem_size);

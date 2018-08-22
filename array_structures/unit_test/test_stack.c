@@ -5,6 +5,12 @@
 #include "../stack.h"
 #include "../../unity/src/unity.h"
 
+typedef struct test_struct_s {
+    int a;
+    void *b;
+    char c[20];
+} test_struct_t;
+
 void test_stack_init_free(void) {
     stack_t *stack = NULL;
     unsigned int test_N = 50;
@@ -97,6 +103,19 @@ void test_stack_shrink_resize(void) {
     stack_free(&stack);
 }
 
+void test_stack_struct_elem(void) {
+    stack_t *stack = NULL;
+
+    stack_init(&stack, 10, sizeof(test_struct_t));
+    test_struct_t item = {
+            10, NULL, "testing",
+    };
+
+    item.b = calloc(30, 30 * 4);
+    stack_push(stack, &item);
+    stack_free(&stack);
+}
+
 int main(void) {
     UNITY_BEGIN();
 
@@ -104,6 +123,7 @@ int main(void) {
     RUN_TEST(test_stack_push_pop);
     RUN_TEST(test_stack_growth_resize);
     RUN_TEST(test_stack_shrink_resize);
+    RUN_TEST(test_stack_struct_elem);
 
     return UNITY_END();
 }
