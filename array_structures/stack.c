@@ -9,7 +9,7 @@
 static int stack_resize(stack_t *stack, size_t N) {
     void *temp;
 
-    temp = calloc(stack->elem_size, N * stack->elem_size);
+    temp = calloc(N, stack->elem_size);
     if (temp == NULL) {
         return -1;
     }
@@ -29,7 +29,7 @@ int stack_init(stack_t **stack, size_t N, size_t elem_size) {
     (*stack)->N = N;
     (*stack)->elem_size = elem_size;
 
-    temp = calloc((*stack)->elem_size, (*stack)->N * (*stack)->elem_size);
+    temp = calloc((*stack)->elem_size, (*stack)->N);
     if (temp == NULL) {
         return -1;
     } else {
