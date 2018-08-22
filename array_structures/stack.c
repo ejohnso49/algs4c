@@ -38,9 +38,9 @@ int stack_init(stack_t **stack, size_t N, size_t elem_size) {
     }
 }
 
-int stack_push(stack_t *stack, void *data) {
+int stack_push(stack_t *stack, void *item) {
     void *dest;
-    if (data == NULL) {
+    if (item == NULL) {
         return -1;
     }
 
@@ -49,12 +49,12 @@ int stack_push(stack_t *stack, void *data) {
     }
 
     dest = (unsigned char *) stack->data + (stack->size * stack->elem_size);
-    memcpy(dest, data, stack->elem_size);
+    memcpy(dest, item, stack->elem_size);
     stack->size++;
     return 1;
 }
 
-int stack_pop(stack_t *stack, void *data) {
+int stack_pop(stack_t *stack, void *item) {
     void *src;
     if (stack_is_empty(stack)) {
         return -1;
@@ -66,7 +66,7 @@ int stack_pop(stack_t *stack, void *data) {
 
     stack->size--;
     src = (unsigned char *) stack->data + (stack->size * stack->elem_size);
-    memcpy(data, src, stack->elem_size);
+    memcpy(item, src, stack->elem_size);
     return 1;
 }
 
