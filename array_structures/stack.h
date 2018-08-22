@@ -2,8 +2,8 @@
 // Created by eric on 8/13/18.
 //
 
-#ifndef C_INTERVIEWS_STACK_H
-#define C_INTERVIEWS_STACK_H
+#ifndef ALGS4C_STACK_H
+#define ALGS4C_STACK_H
 
 #include <stdbool.h>
 #include <stdlib.h>
@@ -24,4 +24,4 @@ extern int stack_pop(stack_t *stack, void *data);
 extern bool stack_is_empty(stack_t *stack);
 extern unsigned int stack_get_size(stack_t *stack);
 
-#endif //C_INTERVIEWS_STACK_H
+#endif //ALGS4C_STACK_H
