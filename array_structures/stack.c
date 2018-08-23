@@ -3,6 +3,7 @@
 //
 
 #include "stack.h"
+#include "../include/common.h"
 #include <string.h>
 #include <stdio.h>
 
@@ -14,7 +15,7 @@ static int stack_resize(stack_t *stack, size_t N) {
         return -1;
     }
 
-    memcpy(temp, stack->data, N * stack->elem_size);
+    memcpy(temp, stack->data, min(stack->N, N) * stack->elem_size);
     free(stack->data);
     stack->data = temp;
     stack->N = N;
