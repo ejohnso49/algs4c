@@ -28,7 +28,7 @@ int stack_init(stack_t **stack, size_t N, size_t elem_size) {
     (*stack)->N = N;
     (*stack)->elem_size = elem_size;
 
-    temp = calloc((*stack)->elem_size, (*stack)->N);
+    temp = calloc((*stack)->N, (*stack)->elem_size);
     if (temp == NULL) {
         return -1;
     } else {
