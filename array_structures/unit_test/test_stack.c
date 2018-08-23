@@ -88,12 +88,12 @@ void test_stack_shrink_resize(void) {
         size_t prev_N = stack->N;
         int temp;
         stack_pop(stack, &temp);
-        if (i <= (prev_N >> 1)) {
+        if (i < (prev_N >> 2)) {
             TEST_ASSERT_EQUAL_UINT(prev_N >> 1, stack->N);
         }
     }
     TEST_ASSERT_TRUE(stack_is_empty(stack));
-    TEST_ASSERT_EQUAL_UINT(1, stack->N);
+    TEST_ASSERT_EQUAL_UINT(7, stack->N);
     stack_free(&stack);
 }
 

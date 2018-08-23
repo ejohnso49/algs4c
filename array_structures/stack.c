@@ -60,7 +60,7 @@ int stack_pop(stack_t *stack, void *item) {
         return -1;
     }
 
-    if ((stack->N > 1) && (stack->size <= (stack->N >> 1))) {
+    if ((stack->N > 0) && (stack->size < (stack->N >> 2))) {
         stack_resize(stack, stack->N >> 1);
     }
 
