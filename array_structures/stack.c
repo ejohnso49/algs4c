@@ -5,7 +5,6 @@
 #include "stack.h"
 #include "../include/common.h"
 #include <string.h>
-#include <stdio.h>
 
 static int stack_resize(stack_t *stack, size_t N) {
     void *temp;
