@@ -52,11 +52,54 @@ void test_queue_en_de_queue() {
     TEST_ASSERT_NULL(queue);
 }
 
+void test_queue_growth_resize() {
+    queue_t *queue = NULL;
+
+    queue_init(&queue, 1, sizeof(int));
+    TEST_ASSERT_NOT_NULL(queue);
+    TEST_ASSERT_NOT_NULL(queue->data);
+    for (unsigned int i = 0; i < 100; i++) {
+        unsigned int prev_N = queue->N;
+        queue_enqueue(queue, &i);
+        TEST_ASSERT_EQUAL_UINT(i + 1, queue_get_size(queue));
+        if (i == prev_N && i > 0) {
+            TEST_ASSERT_EQUAL_UINT(prev_N << 1, queue->N);
+        }
+    }
+
+    queue_free(&queue);
+    TEST_ASSERT_NULL(queue);
+}
+
+void test_queue_shrink_resize() {
+    queue_t *queue = NULL;
+    unsigned int test_N = 500;
+
+    queue_init(&queue, test_N, sizeof(int));
+    for (unsigned int i = 0; i < test_N; i++) {
+        queue_enqueue(queue, &i);
+    }
+
+    for (unsigned int i = test_N; i > 0; i--) {
+        int temp;
+        size_t prev_N = queue_get_size(queue);
+        queue_dequeue(queue, &temp);
+        if (i < (prev_N >> 2)) {
+            TEST_ASSERT_EQUAL_UINT(prev_N >> 1, queue_get_size(queue));
+        }
+    }
+    TEST_ASSERT_TRUE(queue_is_empty(queue));
+    TEST_ASSERT_EQUAL_UINT(7, queue->N);
+    queue_free(&queue);
+}
+
 int main(void) {
     UNITY_BEGIN();
 
     RUN_TEST(test_queue_init);
     RUN_TEST(test_queue_en_de_queue);
+    RUN_TEST(test_queue_growth_resize);
+    RUN_TEST(test_queue_shrink_resize);
 
     return UNITY_END();
 }
