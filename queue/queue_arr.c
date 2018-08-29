@@ -2,11 +2,11 @@
 // Created by eric on 8/21/18.
 //
 
-#include "queue.h"
+#include "queue_arr.h"
 #include "../include/common.h"
 #include <string.h>
 
-static int queue_resize(queue_t *queue, unsigned int N) {
+static int queue_arr_resize(queue_arr_t *queue, unsigned int N) {
     void *temp;
 
     temp = calloc(N, queue->elem_size);
@@ -28,7 +28,7 @@ static int queue_resize(queue_t *queue, unsigned int N) {
     return 1;
 }
 
-int queue_enqueue(queue_t *queue, void *item) {
+int queue_arr_enqueue(queue_arr_t *queue, void *item) {
     void *dest;
 
     if (item == NULL) {
@@ -36,7 +36,7 @@ int queue_enqueue(queue_t *queue, void *item) {
     }
 
     if (queue->size == queue->N) {
-        queue_resize(queue, queue->N << 1);
+        queue_arr_resize(queue, queue->N << 1);
     }
 
     dest = (unsigned char *) queue->data + (queue->enqueue_index * queue->elem_size);
@@ -49,15 +49,15 @@ int queue_enqueue(queue_t *queue, void *item) {
     return 1;
 }
 
-int queue_dequeue(queue_t *queue, void *item) {
+int queue_arr_dequeue(queue_arr_t *queue, void *item) {
     void *src;
 
-    if (queue_is_empty(queue)) {
+    if (queue_arr_is_empty(queue)) {
         return -1;
     }
 
     if ((queue->N > 0) && (queue->size < (queue->N >> 2))) {
-        queue_resize(queue, queue->N >> 1);
+        queue_arr_resize(queue, queue->N >> 1);
     }
 
     src = (unsigned char *) queue->data + (queue->dequeue_index * queue->elem_size);
@@ -70,10 +70,10 @@ int queue_dequeue(queue_t *queue, void *item) {
     return 1;
 }
 
-int queue_init(queue_t **queue, unsigned int N, size_t elem_size) {
+int queue_arr_init(queue_arr_t **queue, unsigned int N, size_t elem_size) {
     void *temp;
 
-    *queue = (queue_t *) calloc(1, sizeof(queue_t));
+    *queue = (queue_arr_t *) calloc(1, sizeof(queue_arr_t));
 
     (*queue)->N = N;
     (*queue)->elem_size = elem_size;
@@ -87,7 +87,7 @@ int queue_init(queue_t **queue, unsigned int N, size_t elem_size) {
     }
 }
 
-void queue_free(queue_t **queue) {
+void queue_arr_free(queue_arr_t **queue) {
     if (*queue != NULL) {
         if ((*queue)->data != NULL) {
             free((*queue)->data);
@@ -99,10 +99,10 @@ void queue_free(queue_t **queue) {
     }
 }
 
-bool queue_is_empty(queue_t *queue) {
+bool queue_arr_is_empty(queue_arr_t *queue) {
     return queue->size == 0;
 }
 
-unsigned int queue_get_size(queue_t *queue) {
+unsigned int queue_arr_get_size(queue_arr_t *queue) {
     return queue->size;
 }

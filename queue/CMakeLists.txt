@@ -1,1 +1,1 @@
-add_library(queue queue.c)
+add_library(queue queue_arr.c)
