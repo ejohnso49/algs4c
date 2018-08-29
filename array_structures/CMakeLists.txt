@@ -1,1 +1,1 @@
-add_library(array_structures stack.c queue.c)
+add_library(array_structures stack.c)

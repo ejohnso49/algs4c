@@ -2,7 +2,7 @@
 // Created by eric on 8/22/18.
 //
 #include <stdio.h>
-#include "../array_structures/queue.h"
+#include "../queue/queue.h"
 #include "../unity/src/unity.h"
 
 void test_queue_init() {
