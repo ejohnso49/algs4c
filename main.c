@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "array_structures/stack.h"
+#include "stack/stack.h"
 
 #define MARKED 1
 

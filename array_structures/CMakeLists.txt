@@ -1,1 +1,0 @@
-add_library(array_structures stack.c)
