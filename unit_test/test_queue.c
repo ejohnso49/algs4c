@@ -2,8 +2,8 @@
 // Created by eric on 8/22/18.
 //
 #include <stdio.h>
-#include "../queue.h"
-#include "../../unity/src/unity.h"
+#include "../array_structures/queue.h"
+#include "../unity/src/unity.h"
 
 void test_queue_init() {
     queue_t *queue = NULL;

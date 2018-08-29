@@ -9,6 +9,7 @@ set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -Wall -Wextra -Werror")
 # Add array_structures library
 add_subdirectory(array_structures)
 add_subdirectory(unity)
+add_subdirectory(unit_test)
 
 add_executable(algs4c main.c)
 # Link to libraries

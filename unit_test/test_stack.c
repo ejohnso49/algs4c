@@ -2,8 +2,8 @@
 // Created by eric on 8/19/18.
 //
 #include <stdio.h>
-#include "../stack.h"
-#include "../../unity/src/unity.h"
+#include "../array_structures/stack.h"
+#include "../unity/src/unity.h"
 
 void test_stack_init_free(void) {
     stack_t *stack = NULL;
