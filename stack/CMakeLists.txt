@@ -1,1 +1,1 @@
-add_library(stack stack.c)
+add_library(stack stack_arr.c)

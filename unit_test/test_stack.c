@@ -2,7 +2,7 @@
 // Created by eric on 8/19/18.
 //
 #include <stdio.h>
-#include "../stack/stack.h"
+#include "../stack/stack_arr.h"
 #include "../unity/src/unity.h"
 
 void test_stack_init_free(void) {

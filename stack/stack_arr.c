@@ -2,7 +2,7 @@
 // Created by eric on 8/13/18.
 //
 
-#include "stack.h"
+#include "stack_arr.h"
 #include <string.h>
 
 static int stack_arr_resize(stack_arr_t *stack, size_t N) {
