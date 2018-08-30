@@ -5,7 +5,7 @@
 #include "stack.h"
 #include <string.h>
 
-static int stack_resize(stack_t *stack, size_t N) {
+static int stack_arr_resize(stack_arr_t *stack, size_t N) {
     void *temp;
 
     temp = calloc(N, stack->elem_size);
@@ -20,10 +20,10 @@ static int stack_resize(stack_t *stack, size_t N) {
     return 1;
 }
 
-int stack_init(stack_t **stack, size_t N, size_t elem_size) {
+int stack_arr_init(stack_arr_t **stack, size_t N, size_t elem_size) {
     void *temp;
 
-    *stack = (stack_t *) calloc(1, sizeof(stack_t));
+    *stack = (stack_arr_t *) calloc(1, sizeof(stack_arr_t));
 
     (*stack)->N = N;
     (*stack)->elem_size = elem_size;
@@ -37,14 +37,14 @@ int stack_init(stack_t **stack, size_t N, size_t elem_size) {
     }
 }
 
-int stack_push(stack_t *stack, void *item) {
+int stack_arr_push(stack_arr_t *stack, void *item) {
     void *dest;
     if (item == NULL) {
         return -1;
     }
 
     if (stack->size == stack->N) {
-        stack_resize(stack, stack->N << 1);
+        stack_arr_resize(stack, stack->N << 1);
     }
 
     dest = (unsigned char *) stack->data + (stack->size * stack->elem_size);
@@ -53,14 +53,14 @@ int stack_push(stack_t *stack, void *item) {
     return 1;
 }
 
-int stack_pop(stack_t *stack, void *item) {
+int stack_arr_pop(stack_arr_t *stack, void *item) {
     void *src;
-    if (stack_is_empty(stack)) {
+    if (stack_arr_is_empty(stack)) {
         return -1;
     }
 
     if ((stack->N > 0) && (stack->size < (stack->N >> 2))) {
-        stack_resize(stack, stack->N >> 1);
+        stack_arr_resize(stack, stack->N >> 1);
     }
 
     stack->size--;
@@ -69,7 +69,7 @@ int stack_pop(stack_t *stack, void *item) {
     return 1;
 }
 
-void stack_free(stack_t **stack) {
+void stack_arr_free(stack_arr_t **stack) {
     if ((*stack) != NULL) {
         if ((*stack)->data != NULL) {
             free((*stack)->data);
@@ -81,10 +81,10 @@ void stack_free(stack_t **stack) {
     }
 }
 
-bool stack_is_empty(stack_t *stack) {
+bool stack_arr_is_empty(stack_arr_t *stack) {
     return stack->size == 0;
 }
 
-unsigned int stack_get_size(stack_t *stack) {
+unsigned int stack_arr_get_size(stack_arr_t *stack) {
     return stack->size;
 }

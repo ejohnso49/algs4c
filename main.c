@@ -111,15 +111,15 @@ void reverse_string(char *string) {
 }
 
 int main() {
-    stack_t *s = NULL;
-    int result = stack_init(&s, 10, sizeof(unsigned char));
+    stack_arr_t *s = NULL;
+    int result = stack_arr_init(&s, 10, sizeof(unsigned char));
     printf("stack init result = %d\n", result);
     char temp = 'a';
-    stack_push(s, (void *) &temp);
+    stack_arr_push(s, (void *) &temp);
     printf("stack size now = %d, temp = %d\n", s->size, temp);
-    stack_pop(s, (void *) &temp);
+    stack_arr_pop(s, (void *) &temp);
     printf("stack size now = %d, temp = %d\n", s->size, (int) temp);
-    stack_free(&s);
+    stack_arr_free(&s);
     printf("s = %p\n", s);
     return 0;
 }
