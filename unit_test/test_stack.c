@@ -5,7 +5,7 @@
 #include "../stack/stack_arr.h"
 #include "../unity/src/unity.h"
 
-void test_stack_init_free(void) {
+void test_stack_arr_init_free(void) {
     stack_arr_t *stack = NULL;
     unsigned int test_N = 50;
     unsigned int test_init_val = 0;
@@ -23,7 +23,7 @@ void test_stack_init_free(void) {
     TEST_ASSERT_NULL(stack);
 }
 
-void test_stack_push_pop(void) {
+void test_stack_arr_push_pop(void) {
     stack_arr_t *stack = NULL;
     unsigned int test_N = 50;
     unsigned int result = 0;
@@ -53,7 +53,7 @@ void test_stack_push_pop(void) {
     TEST_ASSERT_NULL(stack);
 }
 
-void test_stack_growth_resize(void) {
+void test_stack_arr_growth_resize(void) {
     stack_arr_t *stack = NULL;
 
     stack_arr_init(&stack, 1, sizeof(int));
@@ -73,7 +73,7 @@ void test_stack_growth_resize(void) {
     stack_arr_free(&stack);
 }
 
-void test_stack_shrink_resize(void) {
+void test_stack_arr_shrink_resize(void) {
     stack_arr_t *stack = NULL;
     unsigned int test_N = 500;
 
@@ -100,10 +100,10 @@ void test_stack_shrink_resize(void) {
 int main(void) {
     UNITY_BEGIN();
 
-    RUN_TEST(test_stack_init_free);
-    RUN_TEST(test_stack_push_pop);
-    RUN_TEST(test_stack_growth_resize);
-    RUN_TEST(test_stack_shrink_resize);
+    RUN_TEST(test_stack_arr_init_free);
+    RUN_TEST(test_stack_arr_push_pop);
+    RUN_TEST(test_stack_arr_growth_resize);
+    RUN_TEST(test_stack_arr_shrink_resize);
 
     return UNITY_END();
 }
