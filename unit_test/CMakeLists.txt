@@ -1,5 +1,5 @@
 add_executable(testStack test_stack_arr.c)
-add_executable(testQueue test_queue.c)
+add_executable(testQueue test_queue_arr.c)
 target_link_libraries(testStack unity)
 target_link_libraries(testStack stack)
 target_link_libraries(testQueue unity)
