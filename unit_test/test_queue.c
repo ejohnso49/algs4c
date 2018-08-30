@@ -5,7 +5,7 @@
 #include "../queue/queue_arr.h"
 #include "../unity/src/unity.h"
 
-void test_queue_init() {
+void test_queue_arr_init() {
     queue_arr_t *queue = NULL;
     unsigned int test_N = 50;
     unsigned int test_init_val = 0;
@@ -23,7 +23,7 @@ void test_queue_init() {
     TEST_ASSERT_NULL(queue);
 }
 
-void test_queue_en_de_queue() {
+void test_queue_arr_en_de_queue() {
     queue_arr_t *queue = NULL;
     unsigned int test_N = 50;
     unsigned int result = 0;
@@ -52,7 +52,7 @@ void test_queue_en_de_queue() {
     TEST_ASSERT_NULL(queue);
 }
 
-void test_queue_growth_resize() {
+void test_queue_arr_growth_resize() {
     queue_arr_t *queue = NULL;
 
     queue_arr_init(&queue, 1, sizeof(int));
@@ -71,7 +71,7 @@ void test_queue_growth_resize() {
     TEST_ASSERT_NULL(queue);
 }
 
-void test_queue_shrink_resize() {
+void test_queue_arr_shrink_resize() {
     queue_arr_t *queue = NULL;
     unsigned int test_N = 500;
 
@@ -96,10 +96,10 @@ void test_queue_shrink_resize() {
 int main(void) {
     UNITY_BEGIN();
 
-    RUN_TEST(test_queue_init);
-    RUN_TEST(test_queue_en_de_queue);
-    RUN_TEST(test_queue_growth_resize);
-    RUN_TEST(test_queue_shrink_resize);
+    RUN_TEST(test_queue_arr_init);
+    RUN_TEST(test_queue_arr_en_de_queue);
+    RUN_TEST(test_queue_arr_growth_resize);
+    RUN_TEST(test_queue_arr_shrink_resize);
 
     return UNITY_END();
 }
